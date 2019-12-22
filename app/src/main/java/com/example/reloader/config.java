@@ -18,6 +18,12 @@ public class config extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
+//        url = getIntent().getStringExtra("url");
+//
+//        System.out.println("-77777777777777");
+//        System.out.println(url);
+
+
         start = findViewById(R.id.go);
         back = findViewById(R.id.backConfig);
         logout = findViewById(R.id.configsignout);
