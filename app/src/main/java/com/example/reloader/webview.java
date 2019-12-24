@@ -77,6 +77,15 @@ public class webview extends Activity {
 
     }
 
+    public void move_to_next(){
+        Intent i = new Intent(webview.this, Reloader.class);
+        i.putExtra("current_url", webView.getUrl());
+        i.putExtra("time_interval", time_interval);
+        i.putExtra("time_duration", time_duration);
+        startActivity(i);
+
+    }
+
     public void dialog_box(String title, int flag){
         Context context = this;
         LinearLayout layout = new LinearLayout(context);
@@ -110,7 +119,7 @@ public class webview extends Activity {
                     Toast toast=Toast. makeText(getApplicationContext(),"Please enter both values to get started",Toast. LENGTH_SHORT);
                     toast.show();
                 }else{
-
+                    move_to_next();
                 }
 
             }
@@ -128,6 +137,8 @@ public class webview extends Activity {
     public void next_btn(View view) {
 
         dialog_box("Select Time Duration", 0);
-        Log.w("000000000000000", "e check kro ny ");
+
     }
+
+
 }
