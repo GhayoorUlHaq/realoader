@@ -17,7 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 public class MyService extends Service {
 
-    Reloader reloader;
+    webview reloader;
     Integer num;
 
     @Nullable
@@ -31,7 +31,7 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        reloader = Reloader.reloader;
+        reloader = webview.reloader;
         num = 0;
         String interval = intent.getStringExtra("interval");
         String duration = intent.getStringExtra("duration");

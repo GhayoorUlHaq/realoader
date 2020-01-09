@@ -1,14 +1,19 @@
 package com.example.reloader;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -31,6 +36,7 @@ public class webview extends Activity {
     public AlertDialog.Builder alert;
     public String time_interval;
     public String time_duration;
+    static webview reloader;
 
 
 
@@ -39,6 +45,7 @@ public class webview extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        reloader = this;
         alert = new AlertDialog.Builder(this);
 
         btn_next = (Button) findViewById(R.id.next);
@@ -77,17 +84,17 @@ public class webview extends Activity {
 
     }
 
-    public void move_to_next(){
-        Intent i = new Intent(webview.this, Reloader.class);
-        i.putExtra("current_url", webView.getUrl());
-        i.putExtra("time_interval", time_interval);
-        i.putExtra("time_duration", time_duration);
-        startActivity(i);
-
-    }
+//    public void move_to_next(){
+//        Intent i = new Intent(webview.this, Reloader.class);
+//        i.putExtra("current_url", webView.getUrl());
+//        i.putExtra("time_interval", time_interval);
+//        i.putExtra("time_duration", time_duration);
+//        startActivity(i);
+//
+//    }
 
     public void dialog_box(String title, int flag){
-        Context context = this;
+        final Context context = this;
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
 
@@ -119,7 +126,13 @@ public class webview extends Activity {
                     Toast toast=Toast. makeText(getApplicationContext(),"Please enter both values to get started",Toast. LENGTH_SHORT);
                     toast.show();
                 }else{
-                    move_to_next();
+
+
+                    Intent i = new Intent(getBaseContext(), MyService.class);
+                    i.putExtra("interval" , time_interval);
+                    i.putExtra("duration" , time_duration);
+                    context.startService(i);
+
                 }
 
             }
@@ -135,10 +148,57 @@ public class webview extends Activity {
     }
 
     public void next_btn(View view) {
-
         dialog_box("Select Time Duration", 0);
-
     }
+
+
+    public void reload() {
+        webView.reload();
+    }
+
+    public void showNotification(String title, String message){
+
+        Log.d("Hay8","DCM8");
+        Intent intent = new Intent(this, webview.class);
+        Log.d("Hay9","DCM9");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.d("Hay10","DCM10");
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"default")
+                .setSmallIcon(R.drawable.reloader)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent);
+        Log.d("Hay11","DCM11");
+
+
+
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
+        Log.d("Hay12","DCM12");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder.setChannelId("com.myApp");
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "com.myApp",
+                    "My App",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+        notificationManager.notify(2,builder.build());
+    }
+
+
+    public void backbtn(View view){
+        onBackPressed();
+    }
+
+
 
 
 }
