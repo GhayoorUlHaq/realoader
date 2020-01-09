@@ -79,19 +79,11 @@ public class webview extends Activity {
             }
         });
 
-        webView.loadUrl("http://careermidway.com");
-
-
+        Intent i = getIntent();
+        String url = i.getStringExtra("url");
+        webView.loadUrl(url);
     }
 
-//    public void move_to_next(){
-//        Intent i = new Intent(webview.this, Reloader.class);
-//        i.putExtra("current_url", webView.getUrl());
-//        i.putExtra("time_interval", time_interval);
-//        i.putExtra("time_duration", time_duration);
-//        startActivity(i);
-//
-//    }
 
     public void dialog_box(String title, int flag){
         final Context context = this;
