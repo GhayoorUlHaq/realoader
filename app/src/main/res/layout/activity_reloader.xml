@@ -28,6 +28,7 @@
         android:layout_marginEnd="119dp"
         android:layout_marginBottom="21dp"
         android:text="Back"
+        android:onClick="backbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/stop"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +41,10 @@
         android:layout_marginStart="119dp"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="21dp"
-        android:text="Stop(0)"
+        android:text="Stop"
+        android:onClick="stopbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnbackreloader"
         app:layout_constraintTop_toBottomOf="@+id/webView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
