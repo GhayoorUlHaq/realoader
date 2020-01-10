@@ -148,13 +148,10 @@ public class webview extends Activity {
         webView.reload();
     }
 
-    public void showNotification(String title, String message){
+    public void showNotification(String title, String message, boolean ongoing){
 
-        Log.d("Hay8","DCM8");
-        Intent intent = new Intent(this, webview.class);
-        Log.d("Hay9","DCM9");
+        Intent intent = new Intent(this, urlscreen.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        Log.d("Hay10","DCM10");
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"default")
                 .setSmallIcon(R.drawable.reloader)
@@ -162,13 +159,15 @@ public class webview extends Activity {
                 .setContentText(message)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent);
-        Log.d("Hay11","DCM11");
+                .setContentIntent(pendingIntent)
+                .setOnlyAlertOnce(ongoing);
+
+        builder.setOngoing(ongoing);
+
 
 
 
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-        Log.d("Hay12","DCM12");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId("com.myApp");
         }
@@ -186,8 +185,14 @@ public class webview extends Activity {
     }
 
 
+
+
+
     public void backbtn(View view){
+
+        this.stopService(new Intent(this, MyService.class));
         onBackPressed();
+
     }
 
 

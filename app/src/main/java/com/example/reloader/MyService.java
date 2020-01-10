@@ -39,6 +39,7 @@ public class MyService extends Service {
         new CountDownTimer(Integer.parseInt(duration)*1000, Integer.parseInt(interval)*1000) {
 
             public void onTick(long millisUntilFinished) {
+                reloader.showNotification("Reloader Started", "Your Page Reloaded for "+num.toString()+" times", true);
                 reloader.reload();
                 num += 1;
                 Log.w("timer", "time");
@@ -46,7 +47,8 @@ public class MyService extends Service {
             }
 
             public void onFinish() {
-                reloader.showNotification("Reloader Stopped", "Your Page Reloaded for "+num.toString()+" times");
+                reloader.showNotification("Reloader Stopped", "Total Reloads are "+num.toString()+" times", false);
+                onDestroy();
                 Log.e("ended","----------ended-------------");
             }
 
@@ -61,9 +63,6 @@ public class MyService extends Service {
 
     @Override
     public void onDestroy() {
-        reloader.showNotification("Reloader Stopped","");
-
-
         super.onDestroy();
     }
 

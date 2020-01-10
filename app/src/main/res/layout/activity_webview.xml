@@ -41,7 +41,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="71dp"
         android:layout_marginBottom="16dp"
-        android:text="Back"
+        android:text="Stop"
         android:onClick="backbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next"
