@@ -34,6 +34,8 @@ public class login extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(),"All fields are required..",Toast. LENGTH_SHORT);
                     toast.show();
                 }else if(editEmail.getText().toString().equals("ghayoor@gmail.com") && editPassword.getText().toString().equals("aaa")){
+                    editPassword.setText("");
+                    editEmail.setText("");
                     Intent i = new Intent(login.this, urlscreen.class);
                     startActivity(i);
                 }else {

@@ -48,7 +48,7 @@ public class urlscreen extends AppCompatActivity {
 
     public void logout(View v)
     {
-        startActivity(new Intent(getApplicationContext(), urlscreen.class));
+        startActivity(new Intent(getApplicationContext(), login.class));
 
     }
 }
