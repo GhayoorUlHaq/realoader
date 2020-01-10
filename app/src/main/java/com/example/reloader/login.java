@@ -23,7 +23,7 @@ public class login extends AppCompatActivity {
 
         editEmail = findViewById(R.id.email);
         editPassword =  findViewById(R.id.password);
-        
+
 
         loginbtn = findViewById(R.id.login);
         loginbtn.setOnClickListener(new View.OnClickListener() {
