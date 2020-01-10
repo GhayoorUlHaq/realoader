@@ -23,6 +23,7 @@ public class login extends AppCompatActivity {
 
         editEmail = findViewById(R.id.email);
         editPassword =  findViewById(R.id.password);
+        
 
         loginbtn = findViewById(R.id.login);
         loginbtn.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +33,7 @@ public class login extends AppCompatActivity {
                 if(editEmail.getText().toString().equals("") || editPassword.getText().toString().equals("")){
                     Toast toast = Toast.makeText(getApplicationContext(),"All fields are required..",Toast. LENGTH_SHORT);
                     toast.show();
-                }else if(editEmail.getText().toString().equals("ghayoor10th@gmail.com") && editPassword.getText().toString().equals("aaa")){
+                }else if(editEmail.getText().toString().equals("ghayoor@gmail.com") && editPassword.getText().toString().equals("aaa")){
                     Intent i = new Intent(login.this, urlscreen.class);
                     startActivity(i);
                 }else {
